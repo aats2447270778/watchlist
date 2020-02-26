@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ url_for('static',filename='favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-    <title>{{ user.name }}'s WatchList</title>
+    <title>{{ user.name }}'s 博客</title>
     {% endblock %}
 </head>
 
@@ -18,7 +18,7 @@
     {% endfor %}
     <h2>
         <img class="avatar" src="{{ url_for('static',filename='images/2.jpg') }}" alt="头像">
-        {{ user.name }}'s WatchList
+        {{ user.name }}'s 博客
     </h2>
     <nav>
         <ul>
