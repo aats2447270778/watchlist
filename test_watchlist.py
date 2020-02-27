@@ -64,6 +64,22 @@ class WatchlistTestCase(unittest.TestCase):
         data = response.get_data(as_text=True)
         self.assertIn('删除数据成功', data)
 
+    #测试添加
+    def test_edit_item(self):
+        self.login()
+        response = self.client.post(data=dict(
+            title='血战上海滩',
+            year=2000
+        ), follow_redirects=True)
+    # 测试编辑
+    def test_settings_item(self):
+        self.login()
+        response = self.client.post(data=dict(
+            title='血战上海滩',
+            year=2000
+        ), follow_redirects=True)
+
+
 
 if __name__ == "__main__":
     unittest.main()
