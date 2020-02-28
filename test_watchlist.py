@@ -78,8 +78,18 @@ class WatchlistTestCase(unittest.TestCase):
             title='血战上海滩',
             year=2000
         ), follow_redirects=True)
-
-
+        data = response.get_data(as_text=True)
+        self.assertIn("电影信息已经更新",data)
+        self.assertEqual(response.status_code, 200)
+    # 测试设置
+    def test_setting(self):
+        self.login()
+        response = self.client.post('/movie/edit/1',data=dict(
+            name='Ben'
+        ) ,follow_redirects=True)
+        data = response.get_data(as_text=True)
+        self.assertIn("设置name成功",data)
+        self.assertEqual(response.status_code, 200)
 
 if __name__ == "__main__":
     unittest.main()
