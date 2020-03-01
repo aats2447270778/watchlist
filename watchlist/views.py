@@ -1,7 +1,7 @@
 from watchlist import app, db
 from flask import request, redirect, url_for, flash, render_template
 from flask_login import login_user, logout_user, login_required, current_user
-from watchlist.models import User, Movie
+from watchlist.models import User, Ariticles
 
 
 # 首页
@@ -20,13 +20,13 @@ def index():
             flash('输入错误')  # 错误提示
             return redirect(url_for('index'))  # 重定向回主页
 
-        movie = Movie(title=title, content=content,author=author,pubdate=pubdate)  # 创建记录
+        movie =Ariticles(title=title, content=content,author=author,pubdate=pubdate)  # 创建记录
         db.session.add(movie)  # 添加到数据库会话
         db.session.commit()  # 提交数据库会话
         flash('数据创建成功')
         return redirect(url_for('index'))
 
-    movies = Movie.query.all()
+    movies = Ariticles.query.all()
     return render_template('index.html', movies=movies)
 
 
@@ -34,7 +34,7 @@ def index():
 @app.route('/movie/edit/<int:movie_id>', methods=['GET', 'POST'])
 @login_required
 def edit(movie_id):
-    movie = Movie.query.get_or_404(movie_id)
+    movie = Ariticles.query.get_or_404(movie_id)
 
     if request.method == 'POST':
         title = request.form.get('title')
@@ -77,7 +77,7 @@ def settings():
 @app.route('/movie/delete/<int:movie_id>', methods=['POST'])
 @login_required
 def delete(movie_id):
-    movie = Movie.query.get_or_404(movie_id)
+    movie = Ariticles.query.get_or_404(movie_id)
     db.session.delete(movie)
     db.session.commit()
     flash('删除数据成功')
@@ -111,3 +111,20 @@ def logout():
     logout_user()
     flash('退出登录')
     return redirect(url_for('index'))
+#coidng:utf-8
+from flask import Flask
+from flask import render_template
+from flask import request
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def editor():
+    #如果是post方法就返回tinymce生成html代码，否则渲染editor.html
+    if request.method=='POST':
+        return request.form['content']
+    return render_template('editor.html')
+
+if __name__ == '__main__':
+    app.run()
