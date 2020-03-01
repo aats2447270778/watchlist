@@ -6,14 +6,16 @@
 {% if current_user.is_authenticated %}
 <form method="POST">
     电影名 <input type="text" name="title" autocomplete="off" required>
-    年份 <input type="text" name="year" autocomplete="off" required>
+    电影内容<input type="text" name="content" autocomplete="off" required>
+    电影作者<input type="text" name="author" autocomplete="off" required>
+    发布时间<input type="text" name="pubdate" autocomplete="off" required>
     <input type="submit" class="btn" name="submit" value="添加">
 </form>
 {% endif %}
 <ul class="movie-list">
     {% for movie in movies %}
     <li>
-        {{ movie.title }} - {{ movie.year }}
+        {{ movie.title}} - {{ movie.content  }}- {{ movie.author  }}- {{ movie.pubdate  }}
         <span class="float-right">
             <a class="vbd"
                 href="http://v.baidu.com/v?word={{ movie.title }}&ct=301989888&rn=67&pn=0&db=0&s=0&fbl=800&ie=utf-8&oq=nnkd&f=3&rsp=0"

@@ -4,9 +4,9 @@ import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-
+from flask_bootstrap import Bootstrap
 app = Flask(__name__)
-
+bootstrap = Bootstrap(app)
 WIN = sys.platform.startswith('win')
 if WIN:
     prefix = 'sqlite:///'  # 如果是windows系统，三个斜杠

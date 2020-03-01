@@ -12,14 +12,15 @@ def index():
             return redirect(url_for('index'))
         # 获取表单的数据
         title = request.form.get('title')
-        year = request.form.get('year')
-
+        content = request.form.get('content')
+        author = request.form.get('author')
+        pubdate = request.form.get('pubdate')
         # 验证title，year不为空，并且title长度不大于60，year的长度不大于4
-        if not title or not year or len(year) > 4 or len(title) > 60:
+        if not title or not pubdate or len(pubdate) > 4 or len(title) > 60:
             flash('输入错误')  # 错误提示
             return redirect(url_for('index'))  # 重定向回主页
 
-        movie = Movie(title=title, year=year)  # 创建记录
+        movie = Movie(title=title, content=content,author=author,pubdate=pubdate)  # 创建记录
         db.session.add(movie)  # 添加到数据库会话
         db.session.commit()  # 提交数据库会话
         flash('数据创建成功')
@@ -36,15 +37,18 @@ def edit(movie_id):
     movie = Movie.query.get_or_404(movie_id)
 
     if request.method == 'POST':
-        title = request.form['title']
-        year = request.form['year']
+        title = request.form.get('title')
+        content = request.form.get('content')
+        author = request.form.get('author')
+        pubdate = request.form.get('pubdate')
 
-        if not title or not year or len(year) > 4 or len(title) > 60:
+        if not title or not pubdate or len(pubdate) > 4 or len(title) > 60:
             flash('输入错误')
             return redirect(url_for('edit'), movie_id=movie_id)
 
-        movie.title = title
-        movie.year = year
+        movie.content = content
+        movie.author = author
+        movie.pubdate=pubdate
         db.session.commit()
         flash('电影信息已经更新')
         return redirect(url_for('index'))

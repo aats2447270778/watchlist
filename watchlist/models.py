@@ -20,4 +20,6 @@ class User(db.Model, UserMixin):
 class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # 主键
     title = db.Column(db.String(60))
-    year = db.Column(db.String(4))
+    content = db.Column(db.String(60))
+    author = db.Column(db.String(60))
+    pubdate = db.Column(db.String(4))
