@@ -60,7 +60,7 @@ python-timer==0.22
 python3-openid==3.1.0
 pytz==2019.3
 pywin32-ctypes==0.2.0
-PyYAML==5.2
+PyYAML==5.4
 range==1.0.0
 raven==6.10.0
 redis==3.3.11
